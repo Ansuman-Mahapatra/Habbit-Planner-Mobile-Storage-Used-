@@ -1,0 +1,6 @@
+{
+  "appId": "com.habitplanner.app",
+  "appName": "HabitFlow",
+  "webDir": "dist",
+  "bundledWebRuntime": false
+}

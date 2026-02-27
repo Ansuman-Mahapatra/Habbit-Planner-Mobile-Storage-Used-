@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 240 20% 4%;
+    --foreground: 40 10% 90%;
+
+    --card: 240 15% 7%;
+    --card-foreground: 40 10% 90%;
+
+    --popover: 240 15% 9%;
+    --popover-foreground: 40 10% 90%;
+
+    --primary: 38 92% 50%;
+    --primary-foreground: 240 20% 4%;
+
+    --secondary: 240 12% 12%;
+    --secondary-foreground: 40 10% 80%;
+
+    --muted: 240 10% 14%;
+    --muted-foreground: 240 5% 50%;
+
+    --accent: 38 92% 50%;
+    --accent-foreground: 240 20% 4%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 10% 14%;
+    --input: 240 10% 16%;
+    --ring: 38 92% 50%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 240 18% 5%;
+    --sidebar-foreground: 40 10% 80%;
+    --sidebar-primary: 38 92% 50%;
+    --sidebar-primary-foreground: 240 20% 4%;
+    --sidebar-accent: 240 12% 10%;
+    --sidebar-accent-foreground: 40 10% 90%;
+    --sidebar-border: 240 10% 12%;
+    --sidebar-ring: 38 92% 50%;
+
+    /* Custom tokens */
+    --amber-glow: 38 92% 50%;
+    --amber-soft: 38 80% 40%;
+    --amber-dim: 38 60% 25%;
+    --success: 142 71% 45%;
+    --warning: 38 92% 50%;
+    --danger: 0 72% 51%;
+    --health: 160 60% 45%;
+    --mind: 220 70% 55%;
+    --work: 38 92% 50%;
+    --lifestyle: 280 60% 55%;
+    --social: 340 65% 55%;
+    --chart-1: 38 92% 50%;
+    --chart-2: 142 71% 45%;
+    --chart-3: 220 70% 55%;
+    --chart-4: 280 60% 55%;
+    --chart-5: 340 65% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+  .font-mono-stat {
+    font-family: 'DM Mono', monospace;
+  }
+  .font-body {
+    font-family: 'Outfit', sans-serif;
+  }
+}
+
+/* Custom animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 hsl(38 92% 50% / 0.3);
+  }
+  50% {
+    box-shadow: 0 0 16px 4px hsl(38 92% 50% / 0.15);
+  }
+}
+
+@keyframes shimmer {
+  from {
+    background-position: -200% 0;
+  }
+  to {
+    background-position: 200% 0;
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.5s ease-out both;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.4s ease-out both;
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    hsl(38 92% 50% / 0.05) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s ease-in-out infinite;
+}
+
+/* Stagger children */
+.stagger-children > * {
+  animation: fadeUp 0.5s ease-out both;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(240 18% 5%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(240 10% 20%);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(38 92% 50% / 0.5);
+}
