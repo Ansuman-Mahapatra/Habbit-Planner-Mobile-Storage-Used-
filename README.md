@@ -29,7 +29,8 @@ A fully **offline-first**, cross-platform Habit & Goal tracking application buil
 
 ### 📋 Habits
 
-- Create **Permanent** (ongoing) or **Temporary** (date-bound) habits
+- Create **Permanent** (ongoing) habits, **Temporary** (date-bound) habits, or **One-time Scheduled Events**
+- Perfect for tracking daily routines, or setting specific reminders for single events like occasions, appointments, or "Login to a website on X date"
 - Assign habits to Goals — enforces that habit end date cannot exceed goal end date
 - Categories: Health, Mind, Work, Lifestyle, Social
 - Frequencies: Daily, Weekly, Monthly, Times per Month, Custom interval
