@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useHabits } from '@/context/HabitContext';
 import { getHabitStats, getToday, isDueOnDate } from '@/lib/habitUtils';
 import { CATEGORY_CONFIG, FREQUENCY_LABELS } from '@/types/habit';
-import { Check, Flame, Target, Clock, AlertCircle, CalendarCheck } from 'lucide-react';
+import { Check, Flame, Target, Clock, AlertCircle, CalendarCheck, Link as LinkIcon } from 'lucide-react';
 
 function getYesterday(): string {
   const d = new Date();
@@ -198,6 +198,18 @@ export default function Today() {
                           <Flame className="w-3.5 h-3.5" />
                           <span>{s.streak}d streak</span>
                         </div>
+                        {s.habit.actionLink && (
+                          <a 
+                            href={s.habit.actionLink} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="flex items-center gap-1 text-xs text-blue-400 font-medium bg-blue-500/10 px-2 py-1 rounded-md hover:bg-blue-500/20 transition-colors"
+                            onClick={e => e.stopPropagation()}
+                          >
+                            <LinkIcon className="w-3 h-3" />
+                            <span>Action Link</span>
+                          </a>
+                        )}
                       </div>
                     </div>
                   </div>
@@ -243,6 +255,18 @@ export default function Today() {
                             <Target className="w-3 h-3" />
                             {linkedGoal.name}
                           </div>
+                        )}
+                        {s.habit.actionLink && (
+                          <a 
+                            href={s.habit.actionLink} 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="flex items-center gap-1 text-xs text-blue-400 font-medium bg-blue-500/10 px-2 py-0.5 rounded-md hover:bg-blue-500/20 transition-colors"
+                            onClick={e => e.stopPropagation()}
+                          >
+                            <LinkIcon className="w-3 h-3" />
+                            <span>Action Link</span>
+                          </a>
                         )}
                       </div>
                       {linkedGoal?.description && (

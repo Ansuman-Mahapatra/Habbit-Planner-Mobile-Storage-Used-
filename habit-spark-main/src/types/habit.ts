@@ -16,6 +16,7 @@ export interface Habit {
   timesPerMonth?: number;
   goalId?: string | null;
   reminder?: string; // "HH:mm"
+  actionLink?: string; // URL or link
   /** Keep for backwards compatibility if needed */
   repeatEvery?: number;
   repeatUnit?: 'days' | 'weeks';

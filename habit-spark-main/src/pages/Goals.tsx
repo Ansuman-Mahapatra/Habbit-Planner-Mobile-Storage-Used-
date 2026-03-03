@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react';
 import { useHabits } from '@/context/HabitContext';
 import { getHabitStats, generateId, getToday } from '@/lib/habitUtils';
 import { Goal } from '@/types/goal';
-import { Plus, Target, Flame, Calendar, Trash2, Pencil, BarChart } from 'lucide-react';
+import { Plus, Target, Flame, Calendar, Trash2, Pencil, BarChart, Link as LinkIcon } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { CATEGORY_CONFIG, FREQUENCY_LABELS } from '@/types/habit';
 
@@ -121,6 +121,18 @@ export default function Goals() {
                                   ? `${s.habit.timesPerMonth}x / month` 
                                   : FREQUENCY_LABELS[s.habit.frequency]}
                               </div>
+                              {s.habit.actionLink && (
+                                <a 
+                                  href={s.habit.actionLink} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer" 
+                                  className="inline-flex mt-2 items-center gap-1 text-[10px] text-blue-400 font-medium bg-blue-500/10 px-2 py-0.5 rounded-md hover:bg-blue-500/20 transition-colors max-w-full overflow-hidden text-ellipsis whitespace-nowrap"
+                                  onClick={e => e.stopPropagation()}
+                                >
+                                  <LinkIcon className="w-2.5 h-2.5 shrink-0" />
+                                  <span className="truncate">Action Link</span>
+                                </a>
+                              )}
                             </div>
                             <div className="flex flex-col items-end">
                               <div className="flex items-center gap-1 text-primary">
@@ -131,15 +143,21 @@ export default function Goals() {
                           </div>
 
                           {/* Mini Progress Bar for Weekly Target */}
-                          <div className="pl-2 pr-1">
-                            <div className="flex justify-between text-[10px] mb-1">
-                              <span className="text-muted-foreground">Weekly Target</span>
-                              <span className="font-mono text-foreground">{progress}%</span>
-                            </div>
-                            <div className="w-full bg-border h-1.5 rounded-full overflow-hidden">
-                              <div className="bg-primary h-full transition-all duration-700" style={{ width: `${progress}%` }} />
-                            </div>
-                          </div>
+                          {(() => {
+                            // Calculate how far along they are for this week's goal
+                            const progress = Math.min(100, Math.round((s.weekRate / s.habit.weeklyGoal) * 100) || 0);
+                            return (
+                              <div className="pl-2 pr-1">
+                                <div className="flex justify-between text-[10px] mb-1">
+                                  <span className="text-muted-foreground">Weekly Target</span>
+                                  <span className="font-mono text-foreground">{progress}%</span>
+                                </div>
+                                <div className="w-full bg-border h-1.5 rounded-full overflow-hidden">
+                                  <div className="bg-primary h-full transition-all duration-700" style={{ width: `${progress}%` }} />
+                                </div>
+                              </div>
+                            );
+                          })()}
                           
                         </div>
                       )
