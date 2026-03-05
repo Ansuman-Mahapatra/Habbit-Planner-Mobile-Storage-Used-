@@ -232,9 +232,14 @@ export default function Today() {
                   className="bg-card border border-destructive/20 rounded-xl p-4 opacity-80"
                 >
                   <div className="flex items-start gap-4">
-                    <div className="w-9 h-9 rounded-full border-2 border-destructive/40 flex items-center justify-center shrink-0 mt-0.5 bg-destructive/5">
-                      <AlertCircle className="w-4 h-4 text-destructive/60" />
-                    </div>
+                    <button
+                      onClick={() => toggleCompletion(s.habit.id, date)}
+                      className="w-9 h-9 rounded-full border-2 border-destructive/40 flex items-center justify-center shrink-0 mt-0.5 bg-destructive/5 hover:border-destructive hover:bg-destructive/20 transition-all group"
+                      title="Mark as completed for this past date"
+                    >
+                      <AlertCircle className="w-4 h-4 text-destructive/60 group-hover:hidden" />
+                      <Check className="w-4 h-4 text-destructive hidden group-hover:block" />
+                    </button>
                     <div className="flex-1 min-w-0">
                       <div className="text-base font-semibold text-foreground">{s.habit.name}</div>
                       <div className="text-xs text-destructive font-mono mt-1">
