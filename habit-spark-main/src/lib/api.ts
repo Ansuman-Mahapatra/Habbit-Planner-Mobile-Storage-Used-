@@ -1,6 +1,7 @@
 import { Habit, HabitCompletion } from '@/types/habit';
 import { Goal } from '@/types/goal';
 import { initNotifications, scheduleHabitNotification, cancelHabitNotification, scheduleEndOfDaySummary } from './notifications';
+import { getLocalIsoDate } from './habitUtils';
 
 const HABITS_KEY = 'habitflow_habits';
 const COMPLETIONS_KEY = 'habitflow_completions';
@@ -41,7 +42,7 @@ export const api = {
 
   createHabit: async (habit: Omit<Habit, 'id' | 'createdAt'>) => {
     const habits = readStorage<Habit[]>(HABITS_KEY, []);
-    const newHabit: Habit = { ...habit, id: generateId(), createdAt: new Date().toISOString() };
+    const newHabit: Habit = { ...habit, id: generateId(), createdAt: getLocalIsoDate() };
     habits.push(newHabit);
     writeStorage(HABITS_KEY, habits);
     scheduleHabitNotification(newHabit);
@@ -93,7 +94,7 @@ export const api = {
 
   createGoal: async (goal: Omit<Goal, 'id' | 'createdAt'>) => {
     const goals = readStorage<Goal[]>(GOALS_KEY, []);
-    const newGoal: Goal = { ...goal, id: generateId(), createdAt: new Date().toISOString() };
+    const newGoal: Goal = { ...goal, id: generateId(), createdAt: getLocalIsoDate() };
     goals.push(newGoal);
     writeStorage(GOALS_KEY, goals);
     return newGoal;

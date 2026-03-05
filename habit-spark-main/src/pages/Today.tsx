@@ -1,19 +1,13 @@
 import { useMemo } from 'react';
 import { useHabits } from '@/context/HabitContext';
-import { getHabitStats, getToday, isDueOnDate } from '@/lib/habitUtils';
+import { getHabitStats, getToday, getLocalIsoDate, isDueOnDate } from '@/lib/habitUtils';
 import { CATEGORY_CONFIG, FREQUENCY_LABELS } from '@/types/habit';
 import { Check, Flame, Target, Clock, AlertCircle, CalendarCheck, Link as LinkIcon } from 'lucide-react';
-
-function getYesterday(): string {
-  const d = new Date();
-  d.setDate(d.getDate() - 1);
-  return d.toISOString().split('T')[0];
-}
 
 function getDaysAgoStr(n: number): string {
   const d = new Date();
   d.setDate(d.getDate() - n);
-  return d.toISOString().split('T')[0];
+  return getLocalIsoDate(d);
 }
 
 export default function Today() {

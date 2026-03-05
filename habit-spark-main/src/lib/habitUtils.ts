@@ -1,13 +1,20 @@
 import { Habit, HabitCompletion, HabitStats } from '@/types/habit';
 
+export function getLocalIsoDate(date: Date = new Date()): string {
+  const y = date.getFullYear();
+  const m = String(date.getMonth() + 1).padStart(2, '0');
+  const d = String(date.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
+
 export function getToday(): string {
-  return new Date().toISOString().split('T')[0];
+  return getLocalIsoDate(new Date());
 }
 
 function getDaysAgo(n: number): string {
   const d = new Date();
   d.setDate(d.getDate() - n);
-  return d.toISOString().split('T')[0];
+  return getLocalIsoDate(d);
 }
 
 function getDaysBetween(start: string, end: string): string[] {
@@ -15,7 +22,7 @@ function getDaysBetween(start: string, end: string): string[] {
   const s = new Date(start);
   const e = new Date(end);
   for (let d = new Date(s); d <= e; d.setDate(d.getDate() + 1)) {
-    days.push(d.toISOString().split('T')[0]);
+    days.push(getLocalIsoDate(d));
   }
   return days;
 }
